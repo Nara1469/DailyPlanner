@@ -4,9 +4,9 @@ Bootcamp Week 5: Homework
 
 ## Task Requirement
 
-Create a simple calendar application that allows a user to save events for each hour of the day by modifying a starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
+This daily planner comes with a starter code. The current day is displayed at the top of the calendar. To create a simple calendar application that allows a user to save events for each hour of the day in the "timeblocks" during standard business hours. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
 
-You'll need to use the [Moment.js](https://momentjs.com/) library to work with date and time. Be sure to read the documentation carefully and concentrate on using Moment.js in the browser.
+Needs to use the [Moment.js](https://momentjs.com/) library to work with date and time. Be sure to read the documentation carefully and concentrate on using Moment.js in the browser.
 
 ## User Story
 ```
@@ -18,33 +18,17 @@ SO THAT I can manage my time effectively
 ```
 
 ## My Solution
-```
-GIVEN I am using a daily planner to create a schedule
 
-WHEN I open the planner
+I needed to code only in the "timeblocks" for standard business hours (from 9AM to 5PM). /init() function/
 
-THEN the current day is displayed at the top of the calendar
+Each timeblock is color-coded to indicate whether it is in the past, present, or future. /colorPlanner() function/
 
-WHEN I scroll down
+All timeblocks are able to enter an hourly plan or to-do note, then saved by "Save" button. /button click event listener for each hour timeblock/
 
-THEN I am presented with timeblocks for standard business hours
+WHEN the "Save" button for that timeblock has clicked the text for that event is saved in local storage. That way the page is refreshed the saved events persist. Every time the page is refreshed, all color-code classes need to be removed then added to color-code again. Meantime, all the saved to-do notes need to be shown on the timeblocks. /refreshPlanner() function/
 
-WHEN I view the timeblocks for that day
+Also, I added "Clear the Planner" event, it gives a choice if a user wants a fresh start. Because the local storage is used throughout the day there could be a need to clear it all. /clears local storage and todoArray/
 
-THEN each timeblock is color coded to indicate whether it is in the past, present, or future
-
-WHEN I click into a timeblock
-
-THEN I can enter an event
-
-WHEN I click the save button for that timeblock
-
-THEN the text for that event is saved in local storage
-
-WHEN I refresh the page
-
-THEN the saved events persist
-```
 ## Mock-Up
 
 The following picture demonstrates the application appearance:
