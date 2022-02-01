@@ -1,12 +1,12 @@
 // ------------- moment.js ---------------
 const today = moment();
-// const hour = moment().hour();
-const hour = 13;
-console.log(hour);
 
 $("#currentDay").text("Today is " + today.format("MMMM Do, YYYY") + " " + today.format("dddd"));
 
-const workHour = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+// const hour = moment().hour();
+const hour = 14;
+const refreshBtn = $("#refresh-button");
+
 let todoArray = [
   {
     actHour: "9",
@@ -46,16 +46,16 @@ let todoArray = [
   }
 ];
 
+// --------------------- Logic ----------------------
 
-function colorCode() {
-  for (let i = 0; i < workHour.length; i++) {
-    const element = workHour[i];
+function colorPlanner() {
+  for (let i = 0; i < todoArray.length; i++) {
+    const element = todoArray[i].actHour;
     const todoId = "#" + "todo" + element;
-    console.log(todoId);
     if (element < hour) {
       $(todoId).addClass("past");
-    } 
-    if (element === hour) {
+    }
+    if (element == hour) {
       $(todoId).addClass("present");
     }
     if (element > hour) {
@@ -64,15 +64,42 @@ function colorCode() {
   }
 }
 
+function refreshPlanner() {
+  const tempArray = localStorage.getItem("todoArray");
+  if (tempArray) {
+    todoArray = JSON.parse(tempArray);
+    console.log(todoArray);
+    for (let i = 0; i < todoArray.length; i++) {
+      const textHour = todoArray[i].actHour;
+      const todoId = "#" + "todo" + textHour;
+      const element = $(todoId);
+      // undo colorPlanner
+      const textClass = element[0].className;
+      if (textClass.includes("past")) {
+        $(todoId).removeClass("past");
+      }
+      if (textClass.includes("present")) {
+        $(todoId).removeClass("present");
+      }
+      if (textClass.includes("future")) {
+        $(todoId).removeClass("future");
+      }
+      // print out the Planner todo list
+      element[0].children[0].textContent = todoArray[i].actText;
+    }
+  }
+}
+
 function init() {
-  colorCode();
+  refreshPlanner();
+  colorPlanner();
 }
 
 init();
 
 // ------------- Event Listener ---------------
 
-$('#button9').on('click', function() {
+$('#button9').on('click', function () {
   const text = $('#todo9').children(0).val();
   if (text) {
     todoArray[0].actText = text;
@@ -81,7 +108,7 @@ $('#button9').on('click', function() {
   }
 });
 
-$('#button10').on('click', function() {
+$('#button10').on('click', function () {
   const text = $('#todo10').children(0).val();
   console.log(text);
   if (text) {
@@ -91,7 +118,7 @@ $('#button10').on('click', function() {
   }
 });
 
-$('#button11').on('click', function() {
+$('#button11').on('click', function () {
   const text = $('#todo11').children(0).val();
   console.log(text);
   if (text) {
@@ -101,7 +128,7 @@ $('#button11').on('click', function() {
   }
 });
 
-$('#button12').on('click', function() {
+$('#button12').on('click', function () {
   const text = $('#todo12').children(0).val();
   console.log(text);
   if (text) {
@@ -111,7 +138,7 @@ $('#button12').on('click', function() {
   }
 });
 
-$('#button13').on('click', function() {
+$('#button13').on('click', function () {
   const text = $('#todo13').children(0).val();
   console.log(text);
   if (text) {
@@ -121,7 +148,7 @@ $('#button13').on('click', function() {
   }
 });
 
-$('#button14').on('click', function() {
+$('#button14').on('click', function () {
   const text = $('#todo14').children(0).val();
   console.log(text);
   if (text) {
@@ -131,7 +158,7 @@ $('#button14').on('click', function() {
   }
 });
 
-$('#button15').on('click', function() {
+$('#button15').on('click', function () {
   const text = $('#todo15').children(0).val();
   console.log(text);
   if (text) {
@@ -141,7 +168,7 @@ $('#button15').on('click', function() {
   }
 });
 
-$('#button16').on('click', function() {
+$('#button16').on('click', function () {
   const text = $('#todo16').children(0).val();
   console.log(text);
   if (text) {
@@ -151,7 +178,7 @@ $('#button16').on('click', function() {
   }
 });
 
-$('#button17').on('click', function() {
+$('#button17').on('click', function () {
   const text = $('#todo17').children(0).val();
   console.log(text);
   if (text) {
@@ -161,7 +188,8 @@ $('#button17').on('click', function() {
   }
 });
 
-// Click event causes refresh
-// refreshBtn.on('click', function () {
-//   location.reload();
-// });
+// Clears the Planner
+refreshBtn.on('click', function () {
+  localStorage.clear();
+  todoArray = [];
+});
