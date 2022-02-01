@@ -3,8 +3,8 @@ const today = moment();
 
 $("#currentDay").text("Today is " + today.format("MMMM Do, YYYY") + " " + today.format("dddd"));
 
-// const hour = moment().hour();
-const hour = 14;
+const hour = moment().hour();
+// const hour = 14;
 const refreshBtn = $("#refresh-button");
 
 let todoArray = [
