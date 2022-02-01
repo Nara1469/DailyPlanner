@@ -3,8 +3,8 @@ const today = moment();
 
 $("#currentDay").text("Today is " + today.format("MMMM Do, YYYY") + " " + today.format("dddd"));
 
-const hour = moment().hour();
-// const hour = 14;
+const currentHour = moment().hour();
+// const currentHour = 14;
 const refreshBtn = $("#refresh-button");
 
 let todoArray = [
@@ -52,13 +52,13 @@ function colorPlanner() {
   for (let i = 0; i < todoArray.length; i++) {
     const element = todoArray[i].actHour;
     const todoId = "#" + "todo" + element;
-    if (element < hour) {
+    if (element < currentHour) {
       $(todoId).addClass("past");
     }
-    if (element == hour) {
+    if (element == currentHour) {
       $(todoId).addClass("present");
     }
-    if (element > hour) {
+    if (element > currentHour) {
       $(todoId).addClass("future");
     }
   }
@@ -84,7 +84,7 @@ function refreshPlanner() {
       if (textClass.includes("future")) {
         $(todoId).removeClass("future");
       }
-      // print out the Planner todo list
+      // print out the Planner todo list from localStorage
       element[0].children[0].textContent = todoArray[i].actText;
     }
   }
